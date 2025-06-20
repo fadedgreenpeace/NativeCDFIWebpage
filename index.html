@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Training for Native CDFIs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Stone, Amber, Teal) -->
+    <!-- Application Structure Plan: The application is structured as a single-page, vertical-scrolling learning module. This design guides the user through a logical progression from understanding the "why" (Introduction), to identifying the "what" (Threats), learning the "how" (Defense Framework), strengthening the "who" (Culture), and finally acting on the "now" (Action Plan). This linear flow is intuitive for training material. Key interactions include clicking threat types to reveal details and clicking segments of an interactive chart to explore the NIST defense pillars. This approach was chosen to transform passive reading into active learning, making the concepts more engaging and memorable than a static document. -->
+    <!-- Visualization & Content Choices: The core of the application is the interactive NIST framework. Info: NIST's 5 Pillars. Goal: Organize/Inform. Viz: Clickable Doughnut Chart. Interaction: Clicking a chart segment displays detailed action steps for that pillar. Justification: A visual, interactive diagram is more engaging and easier to grasp than a text list, turning a conceptual framework into an explorable tool. Library: Chart.js. For threats, Info: Common cyber threats. Goal: Inform. Viz: A grid of interactive cards. Interaction: Clicking a card reveals details. Justification: Breaks down content into digestible, user-controlled chunks. Library: Vanilla JS. All choices avoid SVG/Mermaid as required. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #0d9488;
+            transform: translateY(-2px);
+        }
+        .threat-card, .pillar-card {
+            transition: all 0.3s ease;
+        }
+        .threat-card:hover, .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-lg text-teal-700">Cybersecurity for Native CDFIs</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#intro" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Introduction</a>
+                        <a href="#threats" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Threats</a>
+                        <a href="#defense" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Defense</a>
+                        <a href="#culture" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Culture</a>
+                        <a href="#resources" class="nav-link text-stone-600 font-medium px-3 py-2 rounded-md text-sm">Action Plan</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="py-16 sm:py-24">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl font-bold text-teal-800 tracking-tight">Protecting Our Communities' Financial Futures</h1>
+                <p class="mt-6 text-lg text-stone-600 max-w-3xl mx-auto">This training is designed specifically for Native CDFIs. Cybersecurity isn't just about technology; it's about upholding the sacred trust placed in us by our communities. We are the guardians of our people's financial data and economic sovereignty. This guide will provide an interactive path to understanding threats and building a strong, resilient defense.</p>
+            </div>
+        </section>
+
+        <section id="threats" class="py-16 sm:py-24 bg-white">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">The Modern Cyber-Threat Landscape</h2>
+                    <p class="mt-4 text-lg leading-8 text-stone-600">The digital world presents unique challenges. Below are the most common threats your CDFI may face. Click each one to learn how to spot it.</p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                    <button onclick="showThreat('phishing')" class="threat-card p-4 text-center bg-stone-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <span class="text-4xl">🎣</span>
+                        <h3 class="mt-2 font-semibold">Phishing</h3>
+                    </button>
+                    <button onclick="showThreat('ransomware')" class="threat-card p-4 text-center bg-stone-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <span class="text-4xl">🔒</span>
+                        <h3 class="mt-2 font-semibold">Ransomware</h3>
+                    </button>
+                    <button onclick="showThreat('malware')" class="threat-card p-4 text-center bg-stone-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <span class="text-4xl">🦠</span>
+                        <h3 class="mt-2 font-semibold">Malware</h3>
+                    </button>
+                    <button onclick="showThreat('social')" class="threat-card p-4 text-center bg-stone-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <span class="text-4xl">🎭</span>
+                        <h3 class="mt-2 font-semibold">Social Engineering</h3>
+                    </button>
+                    <button onclick="showThreat('insider')" class="threat-card p-4 text-center bg-stone-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <span class="text-4xl">👤</span>
+                        <h3 class="mt-2 font-semibold">Insider Threats</h3>
+                    </button>
+                </div>
+                <div id="threat-details" class="mt-8 p-6 bg-amber-50 rounded-lg min-h-[200px] flex items-center justify-center transition-all duration-300">
+                     <p class="text-stone-600">Select a threat above to see the details.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="defense" class="py-16 sm:py-24">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">The Five Pillars of a Strong Cyber Defense</h2>
+                    <p class="mt-4 text-lg leading-8 text-stone-600">We can build our defense using the nationally recognized NIST Cybersecurity Framework. It provides a complete approach to managing risk. Click on any pillar in the chart below to learn the specific actions you can take.</p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="chart-container">
+                        <canvas id="nist-chart"></canvas>
+                    </div>
+                    <div id="pillar-details" class="bg-white p-6 rounded-lg shadow-md min-h-[300px]">
+                        <h3 id="pillar-title" class="text-2xl font-bold text-teal-700">Your Defense Framework</h3>
+                        <p id="pillar-description" class="mt-2 text-stone-600">This framework provides a holistic view of managing cybersecurity risk. The five pillars represent the full lifecycle of a potential incident, from preparation to recovery.</p>
+                        <ul id="pillar-actions" class="mt-4 space-y-2 list-disc list-inside text-stone-700">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="culture" class="py-16 sm:py-24 bg-teal-50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Building a Cyber-Aware Culture</h2>
+                    <p class="mt-4 text-lg leading-8 text-stone-600">Technology is only one part of our defense. Our people are our "human firewall," and fostering a culture of awareness is our greatest strength.</p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="pillar-card bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-teal-800">Ongoing Training</h3>
+                        <p class="mt-2 text-stone-600">Cybersecurity isn't a one-time event. Provide regular training, updates, and reminders to keep awareness high for all staff members.</p>
+                    </div>
+                    <div class="pillar-card bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-teal-800">Storytelling</h3>
+                        <p class="mt-2 text-stone-600">Share real-world examples and stories of cyber threats. This powerful, culturally relevant teaching method makes risks tangible and lessons memorable.</p>
+                    </div>
+                    <div class="pillar-card bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-teal-800">See Something, Say Something</h3>
+                        <p class="mt-2 text-stone-600">Create a safe environment where employees feel comfortable reporting suspicious activity immediately, without fear of blame or repercussion.</p>
+                    </div>
+                    <div class="pillar-card bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-semibold text-teal-800">Lead by Example</h3>
+                        <p class="mt-2 text-stone-600">Leadership must actively champion cybersecurity. When leaders follow security protocols diligently, it sets the standard for the entire organization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="py-16 sm:py-24">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Your Action Plan & Resources</h2>
+                    <p class="mt-4 text-lg leading-8 text-stone-600">You are not alone on this journey. Use these resources and next steps to begin strengthening your defenses today.</p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold text-teal-800">Your Next Steps</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-400 text-white flex items-center justify-center font-bold">1</span>
+                                <p class="ml-3 text-stone-600"><strong>Start the Conversation:</strong> Discuss cybersecurity at your next staff meeting using this tool as a guide.</p>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-400 text-white flex items-center justify-center font-bold">2</span>
+                                <p class="ml-3 text-stone-600"><strong>Take the First Step:</strong> Pick one action item from the "Protect" pillar and implement it this week.</p>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-400 text-white flex items-center justify-center font-bold">3</span>
+                                <p class="ml-3 text-stone-600"><strong>Develop a Plan:</strong> Use the NIST Framework to begin outlining a long-term cybersecurity plan for your CDFI.</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                         <h3 class="text-2xl font-semibold text-teal-800">Helpful Resources</h3>
+                         <ul class="mt-4 space-y-3">
+                            <li><a href="https://www.cisa.gov/cybersecurity-resources-small-and-mid-sized-businesses-smbs" target="_blank" rel="noopener" class="text-teal-600 hover:text-teal-800 font-medium">CISA - Resources for Small Businesses →</a></li>
+                            <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener" class="text-teal-600 hover:text-teal-800 font-medium">NIST - Cybersecurity Framework →</a></li>
+                            <li><a href="https://www.ffiec.gov/cybersecurity.htm" target="_blank" rel="noopener" class="text-teal-600 hover:text-teal-800 font-medium">FFIEC - Cybersecurity Awareness →</a></li>
+                            <li><a href="https://www.dhs.gov/news/2023/07/01/dhs-announces-182-million-first-ever-tribal-cybersecurity-grant-program-awards" target="_blank" rel="noopener" class="text-teal-600 hover:text-teal-800 font-medium">Tribal Cybersecurity Grant Program →</a></li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-stone-800">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-stone-400">Protecting our data is protecting our people. Let's work together to keep our communities' financial futures secure.</p>
+        </div>
+    </footer>
+
+    <script>
+        const threatData = {
+            phishing: {
+                title: '🎣 Phishing & Spear Phishing',
+                description: 'Fraudulent emails, texts, or calls designed to trick you into revealing sensitive information (passwords, account numbers, etc.). Spear phishing is a more targeted version, where the attacker uses information they already know about you or our organization to make the message seem more legitimate.',
+                example: '<strong>Example:</strong> An email that appears to be from a well-known Native organization, asking you to click a link to "verify your account details."'
+            },
+            ransomware: {
+                title: '🔒 Ransomware',
+                description: 'A type of malicious software that encrypts your files, making them inaccessible. The attackers then demand a ransom (usually in cryptocurrency) to restore your access.',
+                example: '<strong>Example:</strong> An employee accidentally clicks on a malicious link in an email, which downloads ransomware and locks up all the CDFI\'s loan files.'
+            },
+            malware: {
+                title: '🦠 Malware',
+                description: 'A broad term for any software designed to harm your computer or network (viruses, spyware, etc.).',
+                example: '<strong>Example:</strong> A virus downloaded from an untrustworthy website that steals client data from your computers.'
+            },
+            social: {
+                title: '🎭 Social Engineering',
+                description: 'The art of manipulating people into giving up confidential information. It relies on human interaction and often involves impersonation.',
+                example: '<strong>Example:</strong> Someone calls the office, pretending to be from IT support, and asks for your password to "fix a problem."'
+            },
+            insider: {
+                title: '👤 Insider Threats',
+                description: 'A threat that comes from within our own organization, whether it\'s a disgruntled employee or a well-intentioned staff member who makes a mistake.',
+                example: '<strong>Example:</strong> A former employee who still has access to the network and uses it to steal client information.'
+            }
+        };
+
+        function showThreat(threatKey) {
+            const detailsContainer = document.getElementById('threat-details');
+            const data = threatData[threatKey];
+            
+            detailsContainer.innerHTML = `
+                <div class="text-left">
+                    <h3 class="text-xl font-bold text-stone-800">${data.title}</h3>
+                    <p class="mt-2 text-stone-600">${data.description}</p>
+                    <p class="mt-4 text-sm text-stone-700 bg-stone-200 p-3 rounded-md">${data.example}</p>
+                </div>
+            `;
+        }
+
+        const pillarData = [
+            {
+                name: 'Identify',
+                description: 'We need to know what we have to protect.',
+                actions: [
+                    'Create an inventory of all hardware (computers, servers, phones), software, and data.',
+                    'Identify who has access to what information.',
+                    'Understand our current cybersecurity risks.'
+                ]
+            },
+            {
+                name: 'Protect',
+                description: 'Putting safeguards in place to protect our assets.',
+                actions: [
+                    'Use strong passwords & Multi-Factor Authentication (MFA).',
+                    'Keep all software and operating systems up to date.',
+                    'Encrypt sensitive data both when stored and when sent.',
+                    'Secure your office Wi-Fi with a strong password.'
+                ]
+            },
+            {
+                name: 'Detect',
+                description: 'Being able to identify a cybersecurity event quickly.',
+                actions: [
+                    'Monitor your systems for unusual activity.',
+                    'Install and maintain antivirus/anti-malware software.',
+                    'Have a clear system for employees to report suspected incidents.'
+                ]
+            },
+            {
+                name: 'Respond',
+                description: 'Having a plan for what to do when an incident occurs.',
+                actions: [
+                    'Create a detailed Incident Response Plan.',
+                    'Practice your plan with drills and different scenarios.',
+                    'Know how to isolate affected systems immediately.'
+                ]
+            },
+            {
+                name: 'Recover',
+                description: 'Getting back to normal operations after an incident.',
+                actions: [
+                    'Regularly back up all important data and store it securely offline.',
+                    'Test your backups to ensure you can restore data.',
+                    'Learn from any incident to improve your defenses.'
+                ]
+            }
+        ];
+
+        const nistChartCtx = document.getElementById('nist-chart').getContext('2d');
+        const nistChart = new Chart(nistChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: pillarData.map(p => p.name),
+                datasets: [{
+                    label: 'NIST Pillars',
+                    data: [1, 1, 1, 1, 1],
+                    backgroundColor: [
+                        '#14532d', // green-900
+                        '#0d9488', // teal-600
+                        '#f59e0b', // amber-500
+                        '#991b1b', // red-800
+                        '#4338ca'  // indigo-700
+                    ],
+                    hoverOffset: 16,
+                    borderColor: '#f5f5f4', // stone-100
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '50%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 14,
+                                family: 'Inter'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.label}`;
+                            }
+                        }
+                    }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        updatePillarDetails(index);
+                    }
+                }
+            }
+        });
+
+        function updatePillarDetails(index) {
+            const pillar = pillarData[index];
+            document.getElementById('pillar-title').textContent = pillar.name;
+            document.getElementById('pillar-description').textContent = pillar.description;
+            const actionsList = document.getElementById('pillar-actions');
+            actionsList.innerHTML = '';
+            pillar.actions.forEach(action => {
+                const li = document.createElement('li');
+                li.textContent = action;
+                actionsList.appendChild(li);
+            });
+        }
+    </script>
+
+</body>
+</html>
