@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Browsing Risks Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add Playfair Display for headings and keep Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Apply fonts for the target aesthetic */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom class for sans-serif font if needed inside styled headers */
+        .font-sans {
+             font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <!-- Main container with white background and sharp corners -->
+    <div class="w-full max-w-4xl bg-white shadow-2xl overflow-hidden border border-gray-700">
+        <!-- Header: Black background, white serif text -->
+        <header class="bg-black text-white p-8 sm:p-12 text-center border-b border-gray-700">
+            <h1 class="text-4xl sm:text-5xl font-bold">Stay Safe Online</h1>
+            <p class="text-lg sm:text-xl mt-4 opacity-80 font-sans">A Guide to Common Web Browsing Risks</p>
+        </header>
+
+        <main class="p-8 sm:p-10 lg:p-12">
+            <!-- Section 1: Fake Full-Screen Pop-ups -->
+            <section class="mb-12">
+                <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                    <div class="w-20 h-20 flex-shrink-0 flex items-center justify-center">
+                        <!-- Monochrome icon -->
+                        <svg class="w-12 h-12 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                        </svg>
+                    </div>
+                    <div class="w-full">
+                        <h2 class="text-3xl font-bold text-gray-900">The Fake Pop-Up Trap</h2>
+                        <p class="text-gray-600 mt-2">Deceptive messages mimicking urgent security alerts. They often take over your screen to create panic and pressure you into hasty actions.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- The Goal: Simple bordered box -->
+                    <div class="bg-transparent p-6 border border-gray-200">
+                        <h3 class="font-bold text-lg text-gray-900">The Goal</h3>
+                        <p class="text-gray-600 mt-2">To trick you into calling a fake tech support number, where scammers will demand money or remote access to "fix" a non-existent problem.</p>
+                    </div>
+
+                    <!-- Red Flags: Simple bordered box -->
+                    <div class="bg-transparent p-6 border border-gray-200">
+                        <h3 class="font-bold text-lg text-gray-900">Red Flags</h3>
+                        <ul class="list-disc list-inside text-gray-600 mt-2 space-y-1">
+                            <li>Alarming, high-pressure language</li>
+                            <li>Browser window is locked or hard to close</li>
+                            <li>Demands an immediate phone call</li>
+                            <li>Uses logos of well-known companies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- What to Do: Highlighted with a light gray background -->
+                <div class="mt-8 bg-gray-100 border border-gray-300 p-6">
+                    <h3 class="font-bold text-lg text-gray-900">What To Do</h3>
+                    <p class="text-gray-700 mt-2"><strong>Never click anything or call the number.</strong> Close the browser. If it is stuck, use <strong>Task Manager (Ctrl+Shift+Esc)</strong> on Windows or <strong>Force Quit (Cmd+Option+Esc)</strong> on a Mac to shut down the browser.</p>
+                </div>
+            </section>
+
+            <!-- Divider: Clean horizontal line -->
+            <hr class="border-gray-200 my-12">
+
+            <!-- Section 2: Malicious Search Ads -->
+            <section>
+                 <div class="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
+                    <div class="w-20 h-20 flex-shrink-0 flex items-center justify-center">
+                        <!-- Monochrome icon -->
+                        <svg class="w-12 h-12 text-gray-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                        </svg>
+                    </div>
+                    <div class="w-full">
+                        <h2 class="text-3xl font-bold text-gray-900">The Malicious Ad Disguise</h2>
+                        <p class="text-gray-600 mt-2">Scammers purchase ads that appear at the top of search results. These ads are crafted to look like official links but lead to dangerous websites.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- The Goal: Simple bordered box -->
+                    <div class="bg-transparent p-6 border border-gray-200">
+                        <h3 class="font-bold text-lg text-gray-900">The Goal</h3>
+                        <p class="text-gray-600 mt-2">To lure you to a fake website that mirrors a real one. There, they steal login credentials, personal data, or financial information.</p>
+                    </div>
+
+                    <!-- Red Flags: Simple bordered box -->
+                    <div class="bg-transparent p-6 border border-gray-200">
+                        <h3 class="font-bold text-lg text-gray-900">Red Flags</h3>
+                        <ul class="list-disc list-inside text-gray-600 mt-2 space-y-1">
+                            <li>Look for the "Ad" or "Sponsored" label</li>
+                            <li>The URL has typos or unusual words</li>
+                            <li>The offer seems too good to be true</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- What to Do: Highlighted with a light gray background -->
+                <div class="mt-8 bg-gray-100 border border-gray-300 p-6">
+                     <h3 class="font-bold text-lg text-gray-900">What To Do</h3>
+                     <p class="text-gray-700 mt-2"><strong>Be skeptical of top search results, especially ads.</strong> Scroll down to organic results, or type the official website address directly into your browser's address bar.</p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer: Black background with more formal tips -->
+        <footer class="bg-black text-white p-8 sm:p-12 mt-12 border-t border-gray-700">
+            <h3 class="text-xl font-bold text-center font-sans">Core Safety Principles</h3>
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                <div>
+                    <strong class="block text-lg">Be Skeptical</strong>
+                    <span class="text-gray-400">Question unsolicited messages and offers.</span>
+                </div>
+                 <div>
+                    <strong class="block text-lg">Be Vigilant</strong>
+                    <span class="text-gray-400">Check URLs and look for signs of a fake.</span>
+                </div>
+                 <div>
+                    <strong class="block text-lg">Be Proactive</strong>
+                    <span class="text-gray-400">Use security tools and keep software updated.</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
