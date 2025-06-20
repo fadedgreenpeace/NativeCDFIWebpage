@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifying Suspect Emails Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-sans {
+             font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="w-full max-w-4xl bg-white shadow-2xl overflow-hidden border border-gray-700">
+        <!-- Header -->
+        <header class="bg-black text-white p-8 sm:p-12 text-center border-b border-gray-700">
+            <h1 class="text-4xl sm:text-5xl font-bold">Anatomy of a Phish</h1>
+            <p class="text-lg sm:text-xl mt-4 opacity-80 font-sans">A Field Guide to Identifying Suspect Emails</p>
+        </header>
+
+        <main class="p-8 sm:p-10 lg:p-12">
+
+            <!-- Introduction -->
+            <div class="text-center mb-12">
+                 <h2 class="text-3xl font-bold text-gray-900">The Five Warning Signs</h2>
+                 <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Phishing emails are designed to trick you. Before you click, take a moment to inspect the message for these common red flags.</p>
+            </div>
+
+            <!-- Warning Signs Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- 1. The Sender Address -->
+                <div class="bg-transparent p-6 border border-gray-200">
+                    <h3 class="font-bold text-xl text-gray-900">1. The Sender Address</h3>
+                    <p class="text-gray-600 mt-3 font-sans">The "From" name might look legitimate, but inspect the actual email address. Scammers often use public domains (like @gmail.com) or create lookalike domains with subtle misspellings.</p>
+                    <div class="mt-4 bg-gray-100 p-3 border border-gray-300 font-sans">
+                        <strong class="text-gray-900 block">Example:</strong> `security@microsoft-support.net`
+                        <span class="text-gray-600 block text-sm">(The real domain is @microsoft.com)</span>
+                    </div>
+                </div>
+
+                <!-- 2. The Tone and Urgency -->
+                <div class="bg-transparent p-6 border border-gray-200">
+                    <h3 class="font-bold text-xl text-gray-900">2. The Tone of Urgency</h3>
+                    <p class="text-gray-600 mt-3 font-sans">The message creates a sense of panic or pressure. It might threaten to close an account, claim you have a problem to fix, or demand immediate action to avoid negative consequences.</p>
+                     <div class="mt-4 bg-gray-100 p-3 border border-gray-300 font-sans">
+                        <strong class="text-gray-900 block">Example:</strong> "Your account has been compromised! Click here to secure it NOW or it will be suspended."
+                    </div>
+                </div>
+
+                <!-- 3. Generic Greetings & Poor Grammar -->
+                <div class="bg-transparent p-6 border border-gray-200">
+                    <h3 class="font-bold text-xl text-gray-900">3. Generic Greetings & Errors</h3>
+                    <p class="text-gray-600 mt-3 font-sans">Legitimate companies usually address you by name. Be wary of generic greetings like "Dear Valued Customer." Spelling mistakes and poor grammar are also major red flags.</p>
+                     <div class="mt-4 bg-gray-100 p-3 border border-gray-300 font-sans">
+                        <strong class="text-gray-900 block">Example:</strong> "dear user, we detected un-usual activitys on you're account."
+                    </div>
+                </div>
+
+                <!-- 4. Suspicious Links or Attachments -->
+                <div class="bg-transparent p-6 border border-gray-200">
+                    <h3 class="font-bold text-xl text-gray-900">4. Suspicious Links & Files</h3>
+                    <p class="text-gray-600 mt-3 font-sans">Hover your mouse over links (without clicking!) to see the actual destination URL. Never open unexpected attachments, especially ZIP files or documents that ask you to "enable macros."</p>
+                     <div class="mt-4 bg-gray-100 p-3 border border-gray-300 font-sans">
+                        <strong class="text-gray-900 block">Example:</strong> The link text says `www.bank.com` but the preview shows `www.b1tly.xyz/scam`.
+                    </div>
+                </div>
+
+            </div>
+
+             <!-- Final Action Step -->
+            <div class="mt-12 bg-gray-800 text-white p-6 text-center">
+                 <h3 class="font-bold text-2xl">When In Doubt, Throw It Out.</h3>
+                 <p class="text-gray-300 mt-2 font-sans">If an email feels suspicious, do not reply, click any links, or download attachments. Report it as phishing or junk and delete it. If you're unsure, contact the supposed sender through a separate, trusted channel.</p>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-black text-white p-8 sm:p-12 mt-4 border-t border-gray-700">
+            <h3 class="text-xl font-bold text-center font-sans">Core Safety Principles</h3>
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                <div>
+                    <strong class="block text-lg">Pause</strong>
+                    <span class="text-gray-400">Resist the urge to act immediately.</span>
+                </div>
+                 <div>
+                    <strong class="block text-lg">Inspect</strong>
+                    <span class="text-gray-400">Look for the red flags listed above.</span>
+                </div>
+                 <div>
+                    <strong class="block text-lg">Verify</strong>
+                    <span class="text-gray-400">Confirm legitimacy through a trusted channel.</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
